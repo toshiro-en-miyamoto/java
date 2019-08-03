@@ -26,7 +26,7 @@ public class LanguageMain {
       assert language == LanguageEnum.JAPANESE : language;
       String languageName = language.toString();
       assert "JAPANESE".equals(languageName) : languageName;
-      LanguageEnum japanese = Enum.valueOf(LanguageEnum.class, "JAPANESE");
+      LanguageEnum japanese = LanguageEnum.valueOf("JAPANESE");
       assert japanese == LanguageEnum.JAPANESE : japanese;
    }
    static LanguageEnumCode getLanguageEnumCode() {
@@ -44,17 +44,17 @@ public class LanguageMain {
       LanguageEnumCode japanese = Enum.valueOf(LanguageEnumCode.class, "JAPANESE");
       assert japanese == LanguageEnumCode.JAPANESE : japanese;
 
-      String alpha2 = LanguageEnumCode.JAPANESE.getAlpha2();
-      assert "ja".equals(alpha2) : alpha2;
+      String jaAlpha2 = LanguageEnumCode.JAPANESE.getAlpha2();
+      assert "ja".equals(jaAlpha2) : jaAlpha2;
+      String enAlpha2 = LanguageEnumCode.ENGLISH.getAlpha2();
+      assert "en".equals(enAlpha2) : enAlpha2;
 
-      String targetAlpha2 = getLanguageEnumCodeAlpha2();
-      Optional<LanguageEnumCode> languageByAlpha2 =
-         Stream.of(LanguageEnumCode.values())
-         .filter(l -> targetAlpha2.equals(l.getAlpha2()))
-         .findFirst();
+      String alpha2 = getLanguageEnumCodeAlpha2();
+      Optional<LanguageEnumCode> constantOfAlpha2 =
+         LanguageEnumCode.getConstantOfAlpha2(alpha2);
       try {
-         LanguageEnumCode languageFound = languageByAlpha2.get();
-         assert languageFound == LanguageEnumCode.JAPANESE : languageFound;
+         LanguageEnumCode constant = constantOfAlpha2.get();
+         assert constant == LanguageEnumCode.JAPANESE : constant;
       } catch(NoSuchElementException e) {
          System.err.println("invalid alph2");
       }
