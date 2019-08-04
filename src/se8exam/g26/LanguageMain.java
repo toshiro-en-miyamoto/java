@@ -44,6 +44,9 @@ public class LanguageMain {
       LanguageEnumCode japanese = Enum.valueOf(LanguageEnumCode.class, "JAPANESE");
       assert japanese == LanguageEnumCode.JAPANESE : japanese;
 
+      int ordinal = LanguageEnumCode.ENGLISH.ordinal();
+      assert 1 == ordinal : ordinal;
+
       String jaAlpha2 = LanguageEnumCode.JAPANESE.getAlpha2();
       assert "ja".equals(jaAlpha2) : jaAlpha2;
       String enAlpha2 = LanguageEnumCode.ENGLISH.getAlpha2();
