@@ -8,6 +8,7 @@ public class LanguageMain {
       languageCode();
       languageEnum();
       languageEnumCode();
+      languageEnumCodeName();
    }
    static int getLanguageIntCode() {
       return LanguageIntCode.JAPANESE;
@@ -24,42 +25,39 @@ public class LanguageMain {
    static void languageEnum() {
       LanguageEnum language = getLanguageEnum();
       assert language == LanguageEnum.JAPANESE : language;
-      String languageName = language.toString();
+
+      String languageName = LanguageEnum.JAPANESE.name();
       assert "JAPANESE".equals(languageName) : languageName;
       LanguageEnum japanese = LanguageEnum.valueOf("JAPANESE");
       assert japanese == LanguageEnum.JAPANESE : japanese;
-   }
-   static LanguageEnumCode getLanguageEnumCode() {
-      return LanguageEnumCode.JAPANESE;
-      // return 99999; // compile error
-   }
-   static String getLanguageEnumCodeAlpha2() {
-      return "ja";
+
+      for (LanguageEnum enumConst : LanguageEnum.values()) {
+         System.out.format("(%s) ", enumConst);
+      }
+      System.out.println();
+
+      final String targetName = "CHINESE";
+      Optional<LanguageEnum> optionalConst =
+         Stream.of(LanguageEnum.values())
+         .filter(enumConst -> targetName.equals(enumConst.name()))
+         .findFirst();
+      try {
+         LanguageEnum foundConst = optionalConst.get();
+         assert foundConst == LanguageEnum.CHINESE : foundConst;
+      } catch(NoSuchElementException e) {
+         System.err.println("enum constant not found");
+      }
    }
    static void languageEnumCode() {
-      LanguageEnumCode language = getLanguageEnumCode();
-      assert language == LanguageEnumCode.JAPANESE : language;
-      String languageName = language.toString();
-      assert "JAPANESE".equals(languageName) : languageName;
-      LanguageEnumCode japanese = Enum.valueOf(LanguageEnumCode.class, "JAPANESE");
-      assert japanese == LanguageEnumCode.JAPANESE : japanese;
-
-      int ordinal = LanguageEnumCode.ENGLISH.ordinal();
-      assert 1 == ordinal : ordinal;
-
-      String jaAlpha2 = LanguageEnumCode.JAPANESE.getAlpha2();
-      assert "ja".equals(jaAlpha2) : jaAlpha2;
-      String enAlpha2 = LanguageEnumCode.ENGLISH.getAlpha2();
-      assert "en".equals(enAlpha2) : enAlpha2;
-
-      String alpha2 = getLanguageEnumCodeAlpha2();
-      Optional<LanguageEnumCode> constantOfAlpha2 =
-         LanguageEnumCode.getConstantOfAlpha2(alpha2);
-      try {
-         LanguageEnumCode constant = constantOfAlpha2.get();
-         assert constant == LanguageEnumCode.JAPANESE : constant;
-      } catch(NoSuchElementException e) {
-         System.err.println("invalid alph2");
+      for (LanguageEnumCode enumConst : LanguageEnumCode.values()) {
+         System.out.format("(%s:%s) ", enumConst.getAlpha2(), enumConst);
       }
+      System.out.println();
+   }
+   static void languageEnumCodeName() {
+      for (LanguageEnumCodeName enumConst : LanguageEnumCodeName.values()) {
+         System.out.format("(%s:%s) ", enumConst.getAlpha2(), enumConst);
+      }
+      System.out.println();
    }
 }
