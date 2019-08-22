@@ -49,14 +49,14 @@ public class LanguageMain {
       }
    }
    static void languageEnumCode() {
-      for (LanguageEnumCode enumConst : LanguageEnumCode.values()) {
-         System.out.format("(%s:%s) ", enumConst.getAlpha2(), enumConst);
+      for (LanguageEnumCode code : LanguageEnumCode.values()) {
+         System.out.format("(%s:%s) ", code.name(), code.getAlpha2());
       }
       System.out.println();
    }
    static void languageEnumCodeName() {
-      for (LanguageEnumCodeName enumConst : LanguageEnumCodeName.values()) {
-         System.out.format("(%s:%s) ", enumConst.getAlpha2(), enumConst);
+      for (LanguageEnumCodeName code : LanguageEnumCodeName.values()) {
+         System.out.format("(%s:%s:%s) ", code.name(), code.getAlpha2(), code);
       }
       System.out.println();
    }
